@@ -25,13 +25,13 @@ module PasswordGenerator
     valid_characters += LOWERCASE_CHARS if lowercase
     valid_characters += NUMBER_CHARS if number
     valid_characters += SPECIAL_CHARS if special
-    valid_characters
+    valid_characters.chars
   end
 
   def self.generate_password_using_chars(length, valid_characters)
     password = ''
     length.times do
-      password += valid_characters.chars.sample
+      password += valid_characters.sample
     end
     password
   end
