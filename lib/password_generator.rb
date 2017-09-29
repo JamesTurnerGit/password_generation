@@ -10,7 +10,7 @@ module PasswordGenerator
                              lowercase = false,
                              number = false,
                              special = false)
-    raise 'need at least one valid set of characters to build a password' unless uppercase || lowercase || number || special
+    raise 'need at least one set of characters to build a password' unless uppercase || lowercase || number || special
     raise 'password must be at least one character long' if length < 1
     valid_characters = build_valid_characters(uppercase,
                                               lowercase,
