@@ -20,7 +20,7 @@ module PasswordGenerator
   end
 
   def self.build_valid_characters(uppercase, lowercase, number, special)
-    valid_characters = ""
+    valid_characters = ''
     valid_characters += UPPERCASE_CHARS if uppercase
     valid_characters += LOWERCASE_CHARS if lowercase
     valid_characters += NUMBER_CHARS if number
@@ -29,11 +29,10 @@ module PasswordGenerator
   end
 
   def self.generate_password_using_chars(length, valid_characters)
-    password = ""
+    password = ''
     length.times do
       password += valid_characters.chars.sample
     end
     password
   end
-
 end
