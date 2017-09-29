@@ -6,7 +6,7 @@ module PasswordGenerator
   SPECIAL_CHARS = '!$%&*@^'.freeze
 
   def self.generate_password(length,
-                             uppercase,
+                             uppercase = true,
                              lowercase = false,
                              number = false,
                              special = false)

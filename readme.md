@@ -19,3 +19,5 @@ To tackle this challenge i've split the task up into two parts, The first part o
 ## Areas where i've strayed from the task
 
 I've packed the generate_password method into a module, and renamed it to match ruby conventions. This gave me a sensible place to store constants without poluting the global namespace
+
+I've added defaults to make it a less clunky password generation tool
