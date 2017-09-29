@@ -32,7 +32,7 @@ describe PasswordGenerator do
       expect(password.chars - valid_characters.chars).to be_empty
     end
     it 'raises if everything is false' do
-      error = "need at least one valid set of characters to build a password"
+      error = "need at least one set of characters to build a password"
       expect { subject.generate_password(10, false, false, false, false) }.to raise_error error
     end
 
