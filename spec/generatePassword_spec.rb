@@ -1,6 +1,6 @@
 require 'generatePassword'
 describe '#generatePassword' do
-  it 'returns something' do
-    expect(generatePassword).not_to be_nil
+  it 'accepts five arguments' do
+    expect{generatePassword(5,true,false,false,false)}.not_to raise_error
   end
 end
