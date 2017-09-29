@@ -1,7 +1,11 @@
 require 'password_generator'
 describe Password_generator do
   it 'accepts five arguments' do
-    expect { subject.generate_password(5, true, false, false, false) }.not_to raise_error
+    expect { subject.generate_password(5,
+                                       true,
+                                       false,
+                                       false,
+                                       false) }.not_to raise_error
   end
 
   it 'uses first var and returns something of the same length' do
@@ -12,6 +16,25 @@ describe Password_generator do
 
   it 'can generate using uppercase only' do
     password = subject.generate_password(10, true)
-    expect(password.chars - subject.uppercase.chars).to be_empty
+    valid_characters = subject::UPPERCASE_CHARS
+    expect(password.chars - valid_characters.chars).to be_empty
+  end
+
+  it 'can generate using lowercase only' do
+    password = subject.generate_password(10, false, true)
+    valid_characters = subject::LOWERCASE_CHARS
+    expect(password.chars - valid_characters.chars).to be_empty
+  end
+
+  it 'can generate using Numbers only' do
+    password = subject.generate_password(10, false, false, true)
+    valid_characters = subject::NUMBER_CHARS
+    expect(password.chars - valid_characters.chars).to be_empty
+  end
+
+  it 'can generate using Special chars only' do
+    password = subject.generate_password(10, false, false, false, true)
+    valid_characters = subject::SPECIAL_CHARS
+    expect(password.chars - valid_characters.chars).to be_empty
   end
 end
