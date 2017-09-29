@@ -5,12 +5,13 @@ module PasswordGenerator
   NUMBER_CHARS = '0123456789'.freeze
   SPECIAL_CHARS = '!$%&*@^'.freeze
 
-  def self.generate_password(length,
+  def self.generate_password(length = 8,
                              uppercase = true,
                              lowercase = false,
                              number = false,
                              special = false)
-
+    raise 'need at least one valid set of characters to build a password' unless uppercase || lowercase || number || special
+    raise 'password must be at least one character long' if length < 1
     valid_characters = build_valid_characters(uppercase,
                                               lowercase,
                                               number,
