@@ -1,5 +1,5 @@
-
-module Password_generator
+# Generates a password of a specified length containing various characters
+module PasswordGenerator
   UPPERCASE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.freeze
   LOWERCASE_CHARS = 'abcdefghijklmnopqrstuvwxyz'.freeze
   NUMBER_CHARS = '0123456789'.freeze
@@ -17,10 +17,7 @@ module Password_generator
                                               special)
 
     generate_password_using_chars(length, valid_characters)
-
   end
-
-  private
 
   def self.build_valid_characters(uppercase, lowercase, number, special)
     valid_characters = ""
@@ -34,12 +31,9 @@ module Password_generator
   def self.generate_password_using_chars(length, valid_characters)
     password = ""
     length.times do
-      password += get_character(valid_characters)
+      password += valid_characters.chars.sample
     end
     password
   end
 
-  def self.get_character(valid_characters)
-    valid_characters[rand(0..valid_characters.length-1)]
-  end
 end

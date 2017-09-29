@@ -1,5 +1,5 @@
 require 'password_generator'
-describe Password_generator do
+describe PasswordGenerator do
   it 'accepts five arguments' do
     expect { subject.generate_password(5,
                                        true,
