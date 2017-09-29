@@ -1,0 +1,3 @@
+def generatePassword
+  "something"
+end
