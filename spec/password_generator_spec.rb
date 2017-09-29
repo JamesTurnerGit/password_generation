@@ -7,17 +7,17 @@ describe PasswordGenerator do
       expect(password.length).to eq length
     end
     it 'can generate using uppercase only' do
-      password = subject.generate_password(10, true)
+      password = subject.generate_password(10, true, false, false, false)
       valid_characters = subject::UPPERCASE_CHARS
       expect(password.chars - valid_characters.chars).to be_empty
     end
     it 'can generate using lowercase only' do
-      password = subject.generate_password(10, false, true)
+      password = subject.generate_password(10, false, true, false, false)
       valid_characters = subject::LOWERCASE_CHARS
       expect(password.chars - valid_characters.chars).to be_empty
     end
     it 'can generate using Numbers only' do
-      password = subject.generate_password(10, false, false, true)
+      password = subject.generate_password(10, false, false, true, false)
       valid_characters = subject::NUMBER_CHARS
       expect(password.chars - valid_characters.chars).to be_empty
     end

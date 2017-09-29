@@ -7,9 +7,9 @@ module PasswordGenerator
 
   def self.generate_password(length = 8,
                              uppercase = true,
-                             lowercase = false,
-                             number = false,
-                             special = false)
+                             lowercase = true,
+                             number = true,
+                             special = true)
     raise 'need at least one set of characters to build a password' unless uppercase || lowercase || number || special
     raise 'password must be at least one character long' if length < 1
     valid_characters = build_valid_characters(uppercase,
