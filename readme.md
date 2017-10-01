@@ -17,8 +17,10 @@ It might seem like a good idea to enforce rules like "at least one number" - but
 
 * clone this repo
 * browse to the root of your cloned repo
+
 for testing:
 * type `rspec` in the console to see the test results
+
 for use
 * type `irb` in the console
 * type `require_relative 'lib/password_generator'`
@@ -35,3 +37,5 @@ for use
 I've packed the generate_password method into a module, and renamed it to match ruby conventions. This gave me a sensible place to store constants without poluting the global namespace or writing them directly inside the method.
 
 I've added defaults to make it a less clunky password generation tool, it now generates a password of length 8 using all the available characters.
+
+Theres two more methods exposed here than requested - This is because without some workarounds which harm readability it's not possible to have private methods inside of a ruby module. One of the benefits of this is that with the two methods with predictable results are a lot easier to test than a method that returns a random one.
