@@ -13,7 +13,7 @@ describe PasswordGenerator do
     end
     it 'calls #generate_password_using_chars and returns the result' do
       length = 8
-      expect(subject.generate_password).to eq password
+      expect(subject.generate_password(length)).to eq password
       expect(PasswordGenerator).to have_received(:generate_password_using_chars).with(length, chars_string)
     end
   end
