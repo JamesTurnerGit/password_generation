@@ -15,7 +15,6 @@ It might seem like a good idea to enforce rules like "at least one number" - but
 
 ## Possible improvements
 
-* reseeding the RNG - with the code as it is there's a possible security risk if someone could find out the current state of the RNG.
 * using named vars - Held off of this because the spec of this challenge specified this exact interface. If this was part of a bigger project, I'd consider adding an extra method to the password generator which simply unpacks named vars in the right order and calls the original one, or maybe an overloaded version of the original method. This would allow legacy parts of code to use the method as expected, while allowing newer ones to use the updated interface safely.
 
 ## Areas where i've strayed from the given description

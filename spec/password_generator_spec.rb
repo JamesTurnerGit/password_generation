@@ -1,44 +1,81 @@
 require 'password_generator'
 describe PasswordGenerator do
   describe '#generate_password' do
+    let(:chars_string){"this string"}
+    let(:password){"password"}
+    before(:each) {
+      allow(PasswordGenerator).to receive(:_build_valid_characters).and_return(chars_string)
+      allow(PasswordGenerator).to receive(:_generate_password_using_chars).and_return(password)
+    }
+    it 'reseeds the RNG' do
+      srand 500
+      subject.generate_password
+      expect(srand).not_to eq 500
+    end
+    it 'calls #_build_valid_characters with the boolean values' do
+      subject.generate_password(8, true, false, true, true)
+      expect(PasswordGenerator).to have_received(:_build_valid_characters).with(true,false,true,true)
+    end
+    it 'calls #_generate_password_using_chars and returns the result' do
+      length = 8
+      expect(subject.generate_password).to eq (password)
+      expect(PasswordGenerator).to have_received(:_generate_password_using_chars).with(length, chars_string)
+    end
+  end
+
+  describe '# _build_valid_characters' do
+    it 'returns uppercase chars only if told' do
+      chars = subject._build_valid_characters(true, false, false, false)
+      expect(chars).to eq subject::UPPERCASE_CHARS
+    end
+
+    it 'returns lowercase only if told' do
+      chars = subject._build_valid_characters(false, true, false, false)
+      expect(chars).to eq subject::LOWERCASE_CHARS
+    end
+
+    it 'returns numbers only if told' do
+      chars = subject._build_valid_characters(false, false, true, false)
+      expect(chars).to eq subject::NUMBER_CHARS
+    end
+
+    it 'returns special chars only if told' do
+      chars = subject._build_valid_characters(false, false, false, true)
+      expect(chars).to eq subject::SPECIAL_CHARS
+    end
+
+    it 'builds whatever mix you ask for' do
+      chars = subject._build_valid_characters(false, true, false, true)
+      expect(chars).to eq (subject::LOWERCASE_CHARS + subject::SPECIAL_CHARS)
+      chars = subject._build_valid_characters(true, false, true, false)
+      expect(chars).to eq (subject::UPPERCASE_CHARS + subject::NUMBER_CHARS)
+    end
+  end
+
+  describe '#_generate_password_using_chars' do
     it 'uses first var and returns something of the same length' do
       length = rand(1..10)
-      password = subject.generate_password(length, true)
+      password = subject._generate_password_using_chars(length, "abc")
       expect(password.length).to eq length
     end
-    it 'can generate using uppercase only' do
-      password = subject.generate_password(10, true, false, false, false)
-      valid_characters = subject::UPPERCASE_CHARS
-      expect(password.chars - valid_characters.chars).to be_empty
+
+    it 'uses the RNG to select letters from the list' do
+      srand 1
+      password = subject._generate_password_using_chars(5, subject::UPPERCASE_CHARS)
+      expect(password).to eq "FLMIJ"
+      srand 2
+      password = subject._generate_password_using_chars(5, subject::UPPERCASE_CHARS)
+      expect(password).not_to eq "FLMIJ"
     end
-    it 'can generate using lowercase only' do
-      password = subject.generate_password(10, false, true, false, false)
-      valid_characters = subject::LOWERCASE_CHARS
-      expect(password.chars - valid_characters.chars).to be_empty
-    end
-    it 'can generate using Numbers only' do
-      password = subject.generate_password(10, false, false, true, false)
-      valid_characters = subject::NUMBER_CHARS
-      expect(password.chars - valid_characters.chars).to be_empty
-    end
-    it 'can generate using Special chars only' do
-      password = subject.generate_password(10, false, false, false, true)
-      valid_characters = subject::SPECIAL_CHARS
-      expect(password.chars - valid_characters.chars).to be_empty
-    end
-    it 'can generate passwords using mixtures' do
-      password = subject.generate_password(10, true, false, false, true)
-      valid_characters = subject::SPECIAL_CHARS + subject::UPPERCASE_CHARS
-      expect(password.chars - valid_characters.chars).to be_empty
-    end
+
     it 'raises if everything is false' do
       error = "need at least one set of characters to build a password"
-      expect { subject.generate_password(10, false, false, false, false) }.to raise_error error
+      expect { subject._generate_password_using_chars(10, "") }.to raise_error error
     end
 
     it 'raises if length is 0' do
       error = "password must be at least one character long"
-      expect { subject.generate_password(0, true, false, false, false) }.to raise_error error
+      expect { subject._generate_password_using_chars(0, "abc") }.to raise_error error
     end
   end
 end
