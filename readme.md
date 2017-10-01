@@ -15,10 +15,12 @@ It might seem like a good idea to enforce rules like "at least one number" - but
 
 ## Possible improvements
 
-* using named vars - Held off of this because the spec of this challenge specified this exact interface. If this was part of a bigger project, I'd consider adding an extra method to the password generator which simply unpacks named vars in the right order and calls the original one, or maybe an overloaded version of the original method. This would allow legacy parts of code to use the method as expected, while allowing newer ones to use the updated interface safely.
+* Using named vars - Held off of this because the spec of this challenge specified this exact interface. If this was part of a bigger project, I'd consider adding an extra method to the password generator which simply unpacks named vars in the right order and calls the original one, or maybe an overloaded version of the original method. This would allow legacy parts of code to use the method as expected, while allowing newer ones to use the updated interface safely.
+
+* Seeding RNG - I keep going back and forth with myself on this one, if it's necessary for a "secure" password probably depends on the enviroment and situation the code is running in. To add it is as simple as inserting "srand" on lines 33 and 36, that would properly obfuscate the status of the RNG during the password generation. In the end i've decided it wouldn't be that necessary because most avenues of attack would require direct access or arbitrary code execution, in which case all bets would be off anyway.
 
 ## Areas where i've strayed from the given description
 
-I've packed the generate_password method into a module, and renamed it to match ruby conventions. This gave me a sensible place to store constants without poluting the global namespace or writing them directly into the method. This is far more in-line with what i'd expect from a enviroment coded using ruby
+I've packed the generate_password method into a module, and renamed it to match ruby conventions. This gave me a sensible place to store constants without poluting the global namespace or writing them directly inside the method.
 
 I've added defaults to make it a less clunky password generation tool, length 8 and all chars will be used.

@@ -15,7 +15,6 @@ module PasswordGenerator
                                               lowercase,
                                               number,
                                               special)
-    srand
     generate_password_using_chars(length, valid_characters)
   end
 
