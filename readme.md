@@ -13,6 +13,17 @@ To tackle this challenge i've split the task up into two parts, The first part o
 
 It might seem like a good idea to enforce rules like "at least one number" - but this actually decreases the security of a password by reducing the search-space a brute force attacker would need to use.
 
+## Instructions
+
+* clone this repo
+* browse to the root of your cloned repo
+for testing:
+* type `rspec` in the console to see the test results
+for use
+* type `irb` in the console
+* type `require_relative 'lib/password_generator'`
+* type `PasswordGenerator.generate_password` and include any of the arguments mentioned in the first part of this document
+
 ## Possible improvements
 
 * Using named vars - Held off of this because the spec of this challenge specified this exact interface. If this was part of a bigger project, I'd consider adding an extra method to the password generator which simply unpacks named vars in the right order and calls the original one, or maybe an overloaded version of the original method. This would allow legacy parts of code to use the method as expected, while allowing newer ones to use the updated interface safely.
