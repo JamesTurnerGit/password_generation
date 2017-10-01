@@ -11,15 +11,15 @@ module PasswordGenerator
                              number = true,
                              special = true)
 
-    valid_characters = _build_valid_characters(uppercase,
+    valid_characters = build_valid_characters(uppercase,
                                               lowercase,
                                               number,
                                               special)
     srand
-    _generate_password_using_chars(length, valid_characters)
+    generate_password_using_chars(length, valid_characters)
   end
 
-  def self._build_valid_characters(uppercase, lowercase, number, special)
+  def self.build_valid_characters(uppercase, lowercase, number, special)
     valid_characters = ''
     valid_characters += UPPERCASE_CHARS if uppercase
     valid_characters += LOWERCASE_CHARS if lowercase
@@ -28,7 +28,7 @@ module PasswordGenerator
     valid_characters
   end
 
-  def self._generate_password_using_chars(length, valid_characters)
+  def self.generate_password_using_chars(length, valid_characters)
     raise 'need at least one set of characters to build a password' if valid_characters.empty?
     raise 'password must be at least one character long' if length < 1
     password = ''
