@@ -18,7 +18,7 @@ describe PasswordGenerator do
     end
   end
 
-  describe '# build_valid_characters' do
+  describe '#build_valid_characters' do
     it 'returns uppercase chars only if told' do
       chars = subject.build_valid_characters(true, false, false, false)
       expect(chars).to eq subject::UPPERCASE_CHARS
