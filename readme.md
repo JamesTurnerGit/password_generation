@@ -23,4 +23,4 @@ It might seem like a good idea to enforce rules like "at least one number" - but
 
 I've packed the generate_password method into a module, and renamed it to match ruby conventions. This gave me a sensible place to store constants without poluting the global namespace or writing them directly inside the method.
 
-I've added defaults to make it a less clunky password generation tool, length 8 and all chars will be used.
+I've added defaults to make it a less clunky password generation tool, it now generates a password of length 8 using all the available options.
