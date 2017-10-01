@@ -7,11 +7,6 @@ describe PasswordGenerator do
       allow(PasswordGenerator).to receive(:build_valid_characters).and_return(chars_string)
       allow(PasswordGenerator).to receive(:generate_password_using_chars).and_return(password)
     }
-    it 'reseeds the RNG' do
-      srand 500
-      subject.generate_password
-      expect(srand).not_to eq 500
-    end
     it 'calls #build_valid_characters with the boolean values' do
       subject.generate_password(8, true, false, true, true)
       expect(PasswordGenerator).to have_received(:build_valid_characters).with(true,false,true,true)
@@ -65,7 +60,7 @@ describe PasswordGenerator do
       expect(password).to eq "FLMIJ"
       srand 2
       password = subject.generate_password_using_chars(5, subject::UPPERCASE_CHARS)
-      expect(password).not_to eq "FLMIJ"
+      expect(password).to eq "IPNIW"
     end
 
     it 'raises if everything is false' do
