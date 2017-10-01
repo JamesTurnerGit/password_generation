@@ -17,8 +17,10 @@ It might seem like a good idea to enforce rules like "at least one number" - but
 
 * clone this repo
 * browse to the root of your cloned repo
+
 for testing:
 * type `rspec` in the console to see the test results
+
 for use
 * type `irb` in the console
 * type `require_relative 'lib/password_generator'`
